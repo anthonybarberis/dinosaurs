@@ -34,13 +34,9 @@ const dinos = (function () {
 
 class Creature {
     constructor(creature) {
-        this.species = creature.species;
-        this.weight = creature.weight;
-        this.height = creature.height;
-        this.diet = creature.diet;
-        this.where = creature.where;
-        this.when = creature.when;
-        this.fact = creature.fact;
+        Object.keys(creature).forEach((element) => {
+            this[element] = creature[element];
+        })
     }
     compareCreatures(comparison, creature) {
         switch (comparison) {
