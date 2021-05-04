@@ -1,12 +1,38 @@
+const dinos = (function () {
+    //load dino.json
+    let dinos;
+    let dinoLoad = new XMLHttpRequest();
+    dinoLoad.onload = () => {
+        dinos = JSON.parse(dinoLoad.response).Dinos
+    };
+    dinoLoad.open("GET", "dino.json");
+    dinoLoad.send();
+
+    function getDinos() {
+        return dinos;
+    }
+    function getDino(species) {
+        let dino = 'Not Found'
+        dinos.forEach((element) => {
+            if (element.species == species) dino = element;
+        })
+        return dino
+    }
+    return {
+        getDinos: getDinos,
+        getDino: getDino
+    }
+})();
+
 class Creature {
-    constructor(species, weight, height, diet, where, when, fact) {
-        this.species = species;
-        this.weight = weight;
-        this.height = height;
-        this.diet = diet;
-        this.where = where;
-        this.when = when;
-        this.fact = fact;
+    constructor(creature) {
+        this.species = creature.species;
+        this.weight = creature.weight;
+        this.height = creature.height;
+        this.diet = creature.diet;
+        this.where = creature.where;
+        this.when = creature.when;
+        this.fact = creature.fact;
     }
     compareCreatures(comparison, creature) {
         switch (comparison) {
