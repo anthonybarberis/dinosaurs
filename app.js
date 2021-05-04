@@ -1,4 +1,5 @@
 const dinos = (function () {
+    
     //load dino.json
     let dinos;
     let dinoLoad = new XMLHttpRequest();
@@ -8,10 +9,17 @@ const dinos = (function () {
     dinoLoad.open("GET", "dino.json");
     dinoLoad.send();
 
-    function getDinos() {
-        return dinos;
+    //return all dinosaur species names
+    function getDinos() { 
+        dinoNames = [];
+        dinos.forEach((element) => {
+            dinoNames.push(element.species)
+        })
+        return dinoNames;
     }
-    function getDino(species) {
+
+    //return a specific dinosaur object by species name
+    function getDino(species) { 
         let dino = 'Not Found'
         dinos.forEach((element) => {
             if (element.species == species) dino = element;
