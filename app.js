@@ -1,4 +1,4 @@
-function init() {
+window.onload = () => {
     //get height from slider
     document.querySelector('#height').addEventListener('input', (event) => {
         let inches = event.target.value % 12;
@@ -9,12 +9,10 @@ function init() {
     document.querySelector('#weight').addEventListener('input', (event) => {
         document.querySelector('#weight-num').value = `${event.target.value} lbs`
     })
-
 }
-window.onload = init;
 
 const dinos = (function () {
-    
+
     //load dino.json
     let dinos;
     let dinoLoad = new XMLHttpRequest();
@@ -25,7 +23,7 @@ const dinos = (function () {
     dinoLoad.send();
 
     //return all dinosaur species names
-    function getDinos() { 
+    function getDinos() {
         dinoNames = [];
         dinos.forEach((element) => {
             dinoNames.push(element.species)
@@ -34,7 +32,7 @@ const dinos = (function () {
     }
 
     //return a specific dinosaur object by species name
-    function getDino(species) { 
+    function getDino(species) {
         let dino = 'Not Found'
         dinos.forEach((element) => {
             if (element.species == species) dino = element;
