@@ -14,17 +14,37 @@ window.onload = () => {
     document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target))
-        console.log(formData);
+        console.log(grid.createTiles(9, formData));
     })
 }
 
 //grid module
 const grid = (() => {
 
+    function createTiles(gridsize, human) {
+        let dinos = dinoData.getDinos();
+        let selectedDinos = [];
+        let tiles = [];
+        //randomly select dinos until enough are selected
+        while (selectedDinos.length < gridsize - 1) {
+            let dino = dinos[Math.floor((Math.random() * dinos.length))];
+            if (!selectedDinos.includes(dino)) {
+                selectedDinos.push(dino);
+                tiles.push(dinoData.getDino(dino));
+            }
+        }
+        tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
+        return tiles;
+    }
+
+    return {
+        createTiles: createTiles
+    }
+
 })();
 
 //dino module
-const dinos = (() => {
+const dinoData = (() => {
 
     //load dino.json
     let dinos;
@@ -74,9 +94,12 @@ class Creature {
     }
     randomFact(rand) {
         switch (rand) {
-            case 1: return this.where;
-            case 2: return this.when;
-            case 3: return this.fact;
+            case 1:
+                return this.where;
+            case 2:
+                return this.when;
+            case 3:
+                return this.fact;
         }
     }
 }
