@@ -9,6 +9,13 @@ window.onload = () => {
     document.querySelector('#weight').addEventListener('input', (event) => {
         document.querySelector('#weight-num').value = `${event.target.value} lbs`
     })
+
+    //get human data from form
+    document.querySelector('#human-data').addEventListener('submit', (event) => {
+        event.preventDefault();
+        let formData = Object.fromEntries(new FormData(event.target))
+        console.log(formData);
+    })
 }
 
 const dinos = (function () {
