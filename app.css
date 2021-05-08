@@ -1,0 +1,9 @@
+form {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}
+
+form label {
+    margin: 10px 0;
+}

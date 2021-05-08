@@ -3,11 +3,11 @@ window.onload = () => {
     document.querySelector('#height').addEventListener('input', (event) => {
         let inches = event.target.value % 12;
         let feet = (event.target.value - inches) / 12;
-        document.querySelector('#height-num').value = `${feet}' ${inches}"`
+        document.querySelector('#height-num').textContent = `${feet}' ${inches}"`
     })
     //get weight from slider
     document.querySelector('#weight').addEventListener('input', (event) => {
-        document.querySelector('#weight-num').value = `${event.target.value} lbs`
+        document.querySelector('#weight-num').textContent = `${event.target.value} lbs`
     })
 
     //get human data from form
