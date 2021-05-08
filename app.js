@@ -10,7 +10,7 @@ window.onload = () => {
         document.querySelector('#weight-num').textContent = `${event.target.value} lbs`
     })
 
-    //get human data from form
+    //get human data and generate tiles
     document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target))
@@ -25,14 +25,15 @@ const grid = (() => {
         let dinos = dinoData.getDinos();
         let selectedDinos = [];
         let tiles = [];
-        //randomly select dinos until enough are selected
-        while (selectedDinos.length < gridsize - 1) {
+        //randomly select non-pigeon dinos until the grid is filled
+        while (selectedDinos.length < gridsize - 2) {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
-            if (!selectedDinos.includes(dino)) {
+            if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
                 tiles.push(dinoData.getDino(dino));
             }
         }
+        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, dinoData.getDino('pigeon')) //add pigeon randomly
         tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
         return tiles;
     }
