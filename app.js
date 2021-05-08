@@ -39,7 +39,7 @@ const grid = (() => {
         //tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
 
         selectedDinos.forEach(element => {
-            let dino = dinoData.getDino(element)
+            let dino = new Creature(dinoData.getDino(element));
             let tile = document.createElement('div');
             tile.classList.add('tile');
             tile.classList.add('dino');
