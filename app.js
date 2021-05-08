@@ -13,8 +13,10 @@ window.onload = () => {
     //get human data and generate tiles
     document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
-        let formData = Object.fromEntries(new FormData(event.target))
-        console.log(grid.createTiles(9, formData));
+        let formData = Object.fromEntries(new FormData(event.target));
+        grid.createTiles(9, formData).forEach(element => {
+            document.querySelector('#grid').appendChild(element);
+        })
     })
 }
 
@@ -30,11 +32,26 @@ const grid = (() => {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
             if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
-                tiles.push(dinoData.getDino(dino));
+                //tiles.push(dinoData.getDino(dino));
             }
         }
-        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, dinoData.getDino('pigeon')) //add pigeon randomly
-        tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
+        //tiles.splice(Math.floor((Math.random() * tiles.length)), 0, dinoData.getDino('pigeon')) //add pigeon randomly
+        //tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
+
+        selectedDinos.forEach(element => {
+            let dino = dinoData.getDino(element)
+            let tile = document.createElement('div');
+            tile.classList.add('tile');
+            tile.classList.add('dino');
+            tile.id = dino.species;
+            Object.keys(dino).forEach(ele => {
+                let fact = document.createElement('p');
+                fact.textContent = `${ele}: ${dino[ele]}`;
+                tile.appendChild(fact);
+            })
+            tiles.push(tile);
+        })
+
         return tiles;
     }
 
