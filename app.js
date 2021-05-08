@@ -38,6 +38,11 @@ const grid = (() => {
         //tiles.splice(Math.floor((Math.random() * tiles.length)), 0, dinoData.getDino('pigeon')) //add pigeon randomly
         //tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
 
+
+
+        //this isnt a good setup. it's jumping the gun to filling the dom without consider the Creature methods
+
+
         selectedDinos.forEach(element => {
             let dino = new Creature(dinoData.getDino(element));
             let tile = document.createElement('div');
