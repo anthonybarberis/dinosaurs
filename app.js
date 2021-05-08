@@ -18,6 +18,10 @@ window.onload = () => {
     })
 }
 
+const grid = (function () {
+
+})();
+
 const dinos = (function () {
 
     //load dino.json
