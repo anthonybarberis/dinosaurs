@@ -44,7 +44,7 @@ const dinos = (function () {
 
     //return a specific dinosaur object by species name
     function getDino(species) {
-        let dino = 'Not Found'
+        let dino = {};
         dinos.forEach((element) => {
             if (element.species == species) dino = element;
         })
