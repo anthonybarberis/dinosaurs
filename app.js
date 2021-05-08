@@ -1,28 +1,30 @@
 window.onload = () => {
     //get height from slider
-    document.querySelector('#height').addEventListener('input', (event) => {
+    document.querySelector('#height').addEventListener('input', event => {
         let inches = event.target.value % 12;
         let feet = (event.target.value - inches) / 12;
         document.querySelector('#height-num').textContent = `${feet}' ${inches}"`
     })
     //get weight from slider
-    document.querySelector('#weight').addEventListener('input', (event) => {
+    document.querySelector('#weight').addEventListener('input', event => {
         document.querySelector('#weight-num').textContent = `${event.target.value} lbs`
     })
 
     //get human data from form
-    document.querySelector('#human-data').addEventListener('submit', (event) => {
+    document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target))
         console.log(formData);
     })
 }
 
-const grid = (function () {
+//grid module
+const grid = (() => {
 
 })();
 
-const dinos = (function () {
+//dino module
+const dinos = (() => {
 
     //load dino.json
     let dinos;
@@ -36,7 +38,7 @@ const dinos = (function () {
     //return all dinosaur species names
     function getDinos() {
         dinoNames = [];
-        dinos.forEach((element) => {
+        dinos.forEach(element => {
             dinoNames.push(element.species)
         })
         return dinoNames;
@@ -45,8 +47,8 @@ const dinos = (function () {
     //return a specific dinosaur object by species name
     function getDino(species) {
         let dino = {};
-        dinos.forEach((element) => {
-            if (element.species == species) dino = element;
+        dinos.forEach(element => {
+            if (element.species.toLowerCase() === species.toLowerCase()) dino = element;
         })
         return dino
     }
@@ -58,9 +60,7 @@ const dinos = (function () {
 
 class Creature {
     constructor(creature) {
-        Object.keys(creature).forEach((element) => {
-            this[element] = creature[element];
-        })
+        Object.keys(creature).forEach(element => this[element] = creature[element])
     }
     compareCreatures(comparison, creature) {
         switch (comparison) {
