@@ -115,14 +115,16 @@ class Creature {
                 break
         }
     }
-    randomFact(rand) {
-        switch (rand) {
+    randomFact(fact) {
+        switch (fact) {
             case 1:
                 return this.where;
             case 2:
                 return this.when;
             case 3:
                 return this.fact;
+            default:
+                return [this.where, this.when, this.fact][Math.floor((Math.random() * 3))]
         }
     }
     createTile() {
