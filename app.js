@@ -27,18 +27,16 @@ const grid = (() => {
         let dinos = dinoData.getDinos();
         let selectedDinos = [];
         let tiles = [];
-        
+
         //randomly select non-pigeon dinos until the grid is filled
         while (selectedDinos.length < gridsize - 2) {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
             if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
+            dino = new Creature(dinoData.getDino(dino));
+            tiles.push(dino.createTile());
             }
         }
-        selectedDinos.forEach(element => {
-            let dino = new Creature(dinoData.getDino(element));
-            tiles.push(dino.createTile());
-        })
 
         //add pigeon randomly
         let pigeon = new Creature(dinoData.getDino('pigeon'));
@@ -122,7 +120,6 @@ class Creature {
     createTile() {
         let tile = document.createElement('div');
         tile.classList.add('tile');
-        tile.classList.add('dino');
         tile.id = this.species;
         let facts = [];
         Object.keys(this).forEach(element => {
