@@ -121,13 +121,20 @@ class Creature {
         let tile = document.createElement('div');
         tile.classList.add('tile');
         tile.id = this.species;
+
         let name = document.createElement('p');
         if (this.species == 'Human') name.textContent = this.name;
         else name.textContent = this.species;
         tile.appendChild(name);
-        let image = document.createElement('img')
-        image.src = `images/${this.species}.png`
+
+        let image = document.createElement('img');
+        image.src = `images/${this.species}.png`;
         tile.appendChild(image);
+
+        let fact = document.createElement('p');
+        fact.textContent = this.fact;
+        tile.appendChild(fact);
+
         return tile;
     }
 }
