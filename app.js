@@ -14,6 +14,7 @@ window.onload = () => {
     document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target));
+        formData.species = 'Human';
         grid.createTiles(9, formData).forEach(element => {
             document.querySelector('#grid').appendChild(element);
         })
@@ -33,19 +34,18 @@ const grid = (() => {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
             if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
-            dino = new Creature(dinoData.getDino(dino));
-            tiles.push(dino.createTile());
+                dino = new Creature(dinoData.getDino(dino));
+                tiles.push(dino.createTile());
             }
         }
 
         //add pigeon randomly
         let pigeon = new Creature(dinoData.getDino('pigeon'));
-        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile()); 
+        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile());
 
         //put the human at the middle index
         let human = new Creature(formData);
-        human.species = 'Human';
-        tiles.splice(Math.floor(gridsize / 2), 0, human.createTile()); 
+        tiles.splice(Math.floor(gridsize / 2), 0, human.createTile());
 
         return tiles;
     }
@@ -121,16 +121,10 @@ class Creature {
         let tile = document.createElement('div');
         tile.classList.add('tile');
         tile.id = this.species;
-        let facts = [];
-        Object.keys(this).forEach(element => {
-            switch (element) {
-                case 'species':
-                    let speciesName = document.createElement('p');
-                    speciesName.textContent = this[element];
-                    tile.appendChild(speciesName);
-                    break
-            }
-        })
+        let name = document.createElement('p');
+        if (this.species == 'Human') name.textContent = this.name;
+        else name.textContent = this.species;
+        tile.appendChild(name);
         let image = document.createElement('img')
         image.src = `images/${this.species}.png`
         tile.appendChild(image);
