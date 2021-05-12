@@ -83,6 +83,7 @@ const dinoData = (() => {
         dinos.forEach(element => {
             if (element.species.toLowerCase() === species.toLowerCase()) dino = element;
         })
+        dino.name = dino.species;
         return dino
     }
     return {
@@ -98,7 +99,10 @@ class Creature {
     compareCreatures(comparison, creature) {
         switch (comparison) {
             case 'weight':
-                break;
+                let difference = this.weight - creature.weight;
+                if (difference > 0) return `${this.name} is ${difference}lbs heavier than ${creature.name}`;
+                else if (difference < 0) return `${this.name} is ${Math.abs(difference)}lbs lighter than ${creature.name}`;
+                else if (this.weight === creature.weight) return `same`;
             case 'height':
                 break;
             case 'diet':
