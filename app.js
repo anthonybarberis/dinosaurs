@@ -45,16 +45,7 @@ const grid = (() => {
 
         selectedDinos.forEach(element => {
             let dino = new Creature(dinoData.getDino(element));
-            let tile = document.createElement('div');
-            tile.classList.add('tile');
-            tile.classList.add('dino');
-            tile.id = dino.species;
-            Object.keys(dino).forEach(ele => {
-                let fact = document.createElement('p');
-                fact.textContent = `${ele}: ${dino[ele]}`;
-                tile.appendChild(fact);
-            })
-            tiles.push(tile);
+            tiles.push(dino.createTile());
         })
 
         return tiles;
