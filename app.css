@@ -7,3 +7,21 @@ form {
 form label {
     margin: 10px 0;
 }
+
+#grid {
+    width: 800px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.tile {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 33%;
+    border: 1px solid black;
+}
+
+.tile img {
+    width: 200px;
+}
