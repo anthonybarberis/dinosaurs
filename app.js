@@ -132,14 +132,19 @@ class Creature {
         tile.classList.add('tile');
         tile.classList.add('dino');
         tile.id = this.species;
+        let facts = [];
+        Object.keys(this).forEach(element => {
+            switch (element) {
+                case 'species':
+                    let speciesName = document.createElement('p');
+                    speciesName.textContent = this[element];
+                    tile.appendChild(speciesName);
+                    break
+            }
+        })
         let image = document.createElement('img')
         image.src = `images/${this.species}.png`
         tile.appendChild(image);
-        Object.keys(this).forEach(element => {
-            let fact = document.createElement('p');
-            fact.textContent = `${element}: ${this[element]}`;
-            tile.appendChild(fact);
-        })
         return tile;
     }
 }
