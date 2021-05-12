@@ -132,6 +132,9 @@ class Creature {
         tile.classList.add('tile');
         tile.classList.add('dino');
         tile.id = this.species;
+        let image = document.createElement('img')
+        image.src = `images/${this.species}.png`
+        tile.appendChild(image);
         Object.keys(this).forEach(element => {
             let fact = document.createElement('p');
             fact.textContent = `${element}: ${this[element]}`;
