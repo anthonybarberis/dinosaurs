@@ -95,15 +95,21 @@ class Creature {
         Object.keys(creature).forEach(element => this[element] = creature[element])
     }
     compareCreatures(comparison, creature) {
+        let difference;
+        let compare = ``
         switch (comparison) {
             case 'weight':
-                let weightDiff = this.weight - creature.weight;
-                if (weightDiff > 0) return `${this.name}(${this.weight}lbs) is ${weightDiff}lbs heavier than ${creature.name}`;
-                else if (weightDiff < 0) return `${this.name} is ${Math.abs(weightDiff)}lbs lighter than ${creature.name}`;
-                else if (this.weight === creature.weight) return `same`;
+                difference = Math.abs(this.weight - creature.weight);
+                if (this.weight > creature.weight) compare = `${difference}lbs heavier than`;
+                else if (this.weight < creature.weight) compare = `${difference}lbs lighter than`;
+                else if (this.weight === creature.weight) compare = 'the exact same weight as';
+                return `${this.name}(${this.weight}lbs) is ${compare} ${creature.name}(${creature.weight}lbs)`;
             case 'height':
-                let heightDiff = this.height - creature.height;        
-                break;
+                difference = Math.abs(this.height - creature.height);
+                if (this.height > creature.height) compare = `${heightFormat(difference)} taller than`;
+                else if (this.height < creature.height) compare = `${heightFormat(difference)} shorter than`;
+                else if (this.height === creature.height) compare = 'the exact same height as';
+                return `${this.name}(${heightFormat(this.height)}) is ${compare} ${creature.name}(${heightFormat(creature.height)})`;
             case 'diet':
                 break
         }
