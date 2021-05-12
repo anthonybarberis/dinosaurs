@@ -23,30 +23,31 @@ window.onload = () => {
 //grid module
 const grid = (() => {
 
-    function createTiles(gridsize, human) {
+    function createTiles(gridsize, formData) {
         let dinos = dinoData.getDinos();
         let selectedDinos = [];
         let tiles = [];
+        
         //randomly select non-pigeon dinos until the grid is filled
         while (selectedDinos.length < gridsize - 2) {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
             if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
-                //tiles.push(dinoData.getDino(dino));
             }
         }
-        //tiles.splice(Math.floor((Math.random() * tiles.length)), 0, dinoData.getDino('pigeon')) //add pigeon randomly
-        //tiles.splice(Math.floor(gridsize / 2), 0, human); //put the human at the middle index
-
-
-
-        //this isnt a good setup. it's jumping the gun to filling the dom without consider the Creature methods
-
-
         selectedDinos.forEach(element => {
             let dino = new Creature(dinoData.getDino(element));
             tiles.push(dino.createTile());
         })
+
+        //add pigeon randomly
+        let pigeon = new Creature(dinoData.getDino('pigeon'));
+        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile()); 
+
+        //put the human at the middle index
+        let human = new Creature(formData);
+        human.species = 'Human';
+        tiles.splice(Math.floor(gridsize / 2), 0, human.createTile()); 
 
         return tiles;
     }
