@@ -111,7 +111,16 @@ class Creature {
                 else if (this.height === creature.height) compare = 'the exact same height as';
                 return `${this.name}(${heightFormat(this.height)}) is ${compare} ${creature.name}(${heightFormat(creature.height)})`;
             case 'diet':
-                break
+                this.diet = this.diet.toLowerCase();
+                creature.diet = creature.diet.toLowerCase();
+                let diets = {
+                    herbivore: 0,
+                    omnivore: 1,
+                    carnivore: 2
+                }
+                if (diets[this.diet] === diets[creature.diet]) return `${this.name} and ${creature.name} have the same diet (${this.diet})`
+                else if (diets[this.diet] > diets[creature.diet]) return `${this.name}(${this.diet}) might eat ${creature.name}(${creature.diet})`
+                else if (diets[this.diet] < diets[creature.diet]) return `${this.name}(${this.diet}) might be eaten by ${creature.name}(${creature.diet})`
         }
     }
     randomFact(fact) {
@@ -149,7 +158,7 @@ class Creature {
 }
 
 //helper to format height into feet and inches
-function heightFormat (heightInInches) {
+function heightFormat(heightInInches) {
     let inches = heightInInches % 12;
     let feet = (heightInInches - inches) / 12;
     return `${feet}' ${inches}"`
