@@ -1,9 +1,7 @@
 window.onload = () => {
     //get height from slider
     document.querySelector('#height').addEventListener('input', event => {
-        let inches = event.target.value % 12;
-        let feet = (event.target.value - inches) / 12;
-        document.querySelector('#height-num').textContent = `${feet}' ${inches}"`
+        document.querySelector('#height-num').textContent = heightFormat(event.target.value)
     })
     //get weight from slider
     document.querySelector('#weight').addEventListener('input', event => {
@@ -99,11 +97,12 @@ class Creature {
     compareCreatures(comparison, creature) {
         switch (comparison) {
             case 'weight':
-                let difference = this.weight - creature.weight;
-                if (difference > 0) return `${this.name} is ${difference}lbs heavier than ${creature.name}`;
-                else if (difference < 0) return `${this.name} is ${Math.abs(difference)}lbs lighter than ${creature.name}`;
+                let weightDiff = this.weight - creature.weight;
+                if (weightDiff > 0) return `${this.name}(${this.weight}lbs) is ${weightDiff}lbs heavier than ${creature.name}`;
+                else if (weightDiff < 0) return `${this.name} is ${Math.abs(weightDiff)}lbs lighter than ${creature.name}`;
                 else if (this.weight === creature.weight) return `same`;
             case 'height':
+                let heightDiff = this.height - creature.height;        
                 break;
             case 'diet':
                 break
@@ -141,4 +140,11 @@ class Creature {
 
         return tile;
     }
+}
+
+//helper to format height into feet and inches
+function heightFormat (heightInInches) {
+    let inches = heightInInches % 12;
+    let feet = (heightInInches - inches) / 12;
+    return `${feet}' ${inches}"`
 }
