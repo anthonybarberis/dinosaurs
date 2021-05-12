@@ -123,18 +123,6 @@ class Creature {
                 else if (diets[this.diet] < diets[creature.diet]) return `${this.name}(${this.diet}) might be eaten by ${creature.name}(${creature.diet})`
         }
     }
-    randomFact(fact) {
-        switch (fact) {
-            case 1:
-                return this.where;
-            case 2:
-                return this.when;
-            case 3:
-                return this.fact;
-            default:
-                return [this.where, this.when, this.fact][Math.floor((Math.random() * 3))]
-        }
-    }
     createTile() {
         let tile = document.createElement('div');
         tile.classList.add('tile');
