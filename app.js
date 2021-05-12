@@ -125,4 +125,16 @@ class Creature {
                 return this.fact;
         }
     }
+    createTile() {
+        let tile = document.createElement('div');
+        tile.classList.add('tile');
+        tile.classList.add('dino');
+        tile.id = this.species;
+        Object.keys(this).forEach(element => {
+            let fact = document.createElement('p');
+            fact.textContent = `${element}: ${this[element]}`;
+            tile.appendChild(fact);
+        })
+        return tile;
+    }
 }
