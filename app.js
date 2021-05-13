@@ -8,7 +8,7 @@ window.onload = () => {
         document.querySelector('#weight-num').textContent = `${event.target.value} lbs`
     })
 
-    //get human data and generate tiles
+    //on submit, get human data from form and generate tiles
     document.querySelector('#human-data').addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target));
@@ -21,7 +21,7 @@ window.onload = () => {
 
 //grid module
 const grid = (() => {
-
+    //create tiles from dinos and form, support for larger grid sizes and more dinos
     function createTiles(gridsize, formData) {
         let dinos = dinoData.getDinos();
         let selectedDinos = [];
@@ -49,7 +49,6 @@ const grid = (() => {
 
         return tiles;
     }
-
     return {
         createTiles: createTiles
     }
@@ -96,7 +95,10 @@ class Creature {
     constructor(creature) {
         Object.keys(creature).forEach(element => this[element] = creature[element])
     }
-    compareCreatures(comparison, creature) {
+
+    //creature comparrison method, takes an argument rather than being three different methods
+    //pass the type of comparison and the Creature object to be compared
+    compare(comparison, creature) {
         let difference;
         let compare = ``
         switch (comparison) {
@@ -125,6 +127,7 @@ class Creature {
                 else if (diets[this.diet] < diets[creature.diet]) return `${this.name}(${this.diet}) might be eaten by ${creature.name}(${creature.diet})`
         }
     }
+    //method for Creature to generate its tile
     createTile(creatureToCompare) {
         let tile = document.createElement('div');
         tile.classList.add('tile');
@@ -147,9 +150,9 @@ class Creature {
         if (randFact == 0) fact.textContent = this.fact;
         if (randFact == 1) fact.textContent = `${this.name} was alive during the ${this.when}`;
         if (randFact == 2) fact.textContent = `${this.name} lived in ${this.where}`;
-        if (randFact == 3) fact.textContent = this.compareCreatures('weight', creatureToCompare);
-        if (randFact == 4) fact.textContent = this.compareCreatures('height', creatureToCompare);
-        if (randFact == 5) fact.textContent = this.compareCreatures('diet', creatureToCompare);;
+        if (randFact == 3) fact.textContent = this.compare('weight', creatureToCompare);
+        if (randFact == 4) fact.textContent = this.compare('height', creatureToCompare);
+        if (randFact == 5) fact.textContent = this.compare('diet', creatureToCompare);;
         if (this.species == 'Human') fact.textContent = '';
         if (this.species == 'Pigeon') fact.textContent = this.fact;
 
