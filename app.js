@@ -113,6 +113,8 @@ const dinoData = (() => {
 class Creature {
     constructor(creature) {
         Object.keys(creature).forEach(element => this[element] = creature[element])
+        this.height = parseFloat(this.height);
+        this.weight = parseFloat(this.weight);
     }
 
     //creature comparrison method, takes an argument rather than being three different methods
