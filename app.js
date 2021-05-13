@@ -27,6 +27,9 @@ const grid = (() => {
         let selectedDinos = [];
         let tiles = [];
 
+        //create human
+        let human = new Creature(formData);
+
         //randomly select non-pigeon dinos until the grid is filled
         while (selectedDinos.length < gridsize - 2) {
             let dino = dinos[Math.floor((Math.random() * dinos.length))];
@@ -42,7 +45,6 @@ const grid = (() => {
         tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile());
 
         //put the human at the middle index
-        let human = new Creature(formData);
         tiles.splice(Math.floor(gridsize / 2), 0, human.createTile());
 
         return tiles;
@@ -138,7 +140,15 @@ class Creature {
         tile.appendChild(image);
 
         let fact = document.createElement('p');
-        fact.textContent = this.fact;
+        let randFact = Math.floor(Math.random() * 4)
+        if (randFact == 0) fact.textContent = this.fact;
+        if (randFact == 1) fact.textContent = `${this.name} was alive during the ${this.when}`;
+        if (randFact == 2) fact.textContent = `${this.name} lived in ${this.where}`;
+        if (randFact == 3) fact.textContent = this.compareCreatures('weight'); //start here
+        if (randFact == 4) fact.textContent = this.fact;
+        if (randFact == 5) fact.textContent = this.fact;
+        if (randFact == 6) fact.textContent = this.fact;
+        if (randFact == 7) fact.textContent = this.fact;
         tile.appendChild(fact);
 
         return tile;
