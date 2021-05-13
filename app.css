@@ -1,7 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: slategray;
+    font-family: sans-serif;
+}
+
+section {
+    padding: 0 10px;
+    color: white;
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+p {
+    margin: 5px 0;
+}
+
 form {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+    align-self: flex-start;
 }
 
 form label {
@@ -9,21 +37,51 @@ form label {
 }
 
 #grid {
-    width: 800px;
     display: flex;
     flex-flow: row wrap;
+    margin: 5px;
 }
 
 .tile {
     display: flex;
     flex-flow: column;
+    justify-content: space-between;
     align-items: center;
-    width: 33%;
-    border: 1px solid black;
+    width: calc((100% / 3) - 10px);
+    margin: 5px;
 }
 
 .tile img {
-    width: 200px;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.tile p {
+    padding: 5px;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    overflow: auto;
+}
+
+.tile p:nth-child(3) {
+    text-align: left;
+}
+
+#Human p:nth-child(3) {
+    visibility: hidden;
+}
+
+button {
+    margin: 5px 0;
+}
+
+footer {
+    font-size: .7em;
+    width: 100%;
+    margin: 0 0 0 10px;
+    color: lightgray;
 }
 
 .removed {
