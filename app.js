@@ -161,7 +161,7 @@ class Creature {
 
         //set species image
         let image = document.createElement('img');
-        image.src = `images/${this.species}.png`;
+        image.src = `images/${this.species.toLowerCase()}.png`;
         tile.appendChild(image);
 
         //determine species fact -- random for dinos, fixed for human and pigeon
