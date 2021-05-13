@@ -130,15 +130,18 @@ class Creature {
         tile.classList.add('tile');
         tile.id = this.species;
 
+        //set species name
         let name = document.createElement('p');
         if (this.species == 'Human') name.textContent = this.name;
         else name.textContent = this.species;
         tile.appendChild(name);
 
+        //set species image
         let image = document.createElement('img');
         image.src = `images/${this.species}.png`;
         tile.appendChild(image);
 
+        //determine species fact -- random for dinos, fixed for human and pigeon
         let fact = document.createElement('p');
         let randFact = Math.floor(Math.random() * 6)
         if (randFact == 0) fact.textContent = this.fact;
@@ -147,6 +150,9 @@ class Creature {
         if (randFact == 3) fact.textContent = this.compareCreatures('weight', creatureToCompare);
         if (randFact == 4) fact.textContent = this.compareCreatures('height', creatureToCompare);
         if (randFact == 5) fact.textContent = this.compareCreatures('diet', creatureToCompare);;
+        if (this.species == 'Human') fact.textContent = '';
+        if (this.species == 'Pigeon') fact.textContent = this.fact;
+
         tile.appendChild(fact);
 
         return tile;
