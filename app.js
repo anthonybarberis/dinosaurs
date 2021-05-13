@@ -36,16 +36,16 @@ const grid = (() => {
             if (!selectedDinos.includes(dino) && dino != 'Pigeon') {
                 selectedDinos.push(dino);
                 dino = new Creature(dinoData.getDino(dino));
-                tiles.push(dino.createTile());
+                tiles.push(dino.createTile(human));
             }
         }
 
         //add pigeon randomly
         let pigeon = new Creature(dinoData.getDino('pigeon'));
-        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile());
+        tiles.splice(Math.floor((Math.random() * tiles.length)), 0, pigeon.createTile(human));
 
         //put the human at the middle index
-        tiles.splice(Math.floor(gridsize / 2), 0, human.createTile());
+        tiles.splice(Math.floor(gridsize / 2), 0, human.createTile(human));
 
         return tiles;
     }
@@ -125,7 +125,7 @@ class Creature {
                 else if (diets[this.diet] < diets[creature.diet]) return `${this.name}(${this.diet}) might be eaten by ${creature.name}(${creature.diet})`
         }
     }
-    createTile() {
+    createTile(creatureToCompare) {
         let tile = document.createElement('div');
         tile.classList.add('tile');
         tile.id = this.species;
@@ -141,10 +141,11 @@ class Creature {
 
         let fact = document.createElement('p');
         let randFact = Math.floor(Math.random() * 4)
+        console.log(creatureToCompare);
         if (randFact == 0) fact.textContent = this.fact;
         if (randFact == 1) fact.textContent = `${this.name} was alive during the ${this.when}`;
         if (randFact == 2) fact.textContent = `${this.name} lived in ${this.where}`;
-        if (randFact == 3) fact.textContent = this.compareCreatures('weight'); //start here
+        if (randFact == 3) fact.textContent = this.compareCreatures('weight', creatureToCompare);
         if (randFact == 4) fact.textContent = this.fact;
         if (randFact == 5) fact.textContent = this.fact;
         if (randFact == 6) fact.textContent = this.fact;
