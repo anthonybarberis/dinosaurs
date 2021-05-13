@@ -12,21 +12,21 @@
 <body>
     <header>
         <h1>Dinosaurs!</h1>
-        <h3>How do you compare?</h3>
+        <p>Enter your info and see how you compare to a few popular dinos. Run it again for a new set of facts!</p>
     </header>
     <!-- Form to get user input -->
     <form id="human-data">
-        <label>Name <input id="name" name="name"></label>
+        <label>Name <input id="name" name="name" required></label>
         <label>Height
-            <input id="height" name="height" type="range" min="48" value="0" max="90">
+            <input id="height" name="height" type="range" min="48" value="0" max="90" required>
             <span id="height-num" type="text"></span>
         </label>
         <label>Weight
-            <input id="weight" name="weight" type="range" min="50" value="0" max="500" step="5">
+            <input id="weight" name="weight" type="range" min="50" value="0" max="500" step="5" required>
             <span id="weight-num" type="text"></span>
         </label>
         <label>Diet
-            <select id="diet" name="diet" value="">
+            <select id="diet" name="diet" value="" required>
                 <option hidden disabled selected></option>
                 <option>Herbivore</option>
                 <option>Omnivore</option>
