@@ -25,3 +25,7 @@ form label {
 .tile img {
     width: 200px;
 }
+
+#again {
+    display: none;
+}
