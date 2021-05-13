@@ -1,26 +1,30 @@
 window.onload = () => {
     //get height from slider
     document.querySelector('#height').addEventListener('input', event => {
-        document.querySelector('#height-num').textContent = heightFormat(event.target.value)
+        document.querySelector('#height-num').textContent = builder.heightFormat(event.target.value)
     })
     //get weight from slider
     document.querySelector('#weight').addEventListener('input', event => {
         document.querySelector('#weight-num').textContent = `${event.target.value} lbs`
     })
 
+    let form = document.querySelector('#human-data');
+    let grid = document.querySelector('#grid');
+    let reset = document.querySelector('#again');
+
     //on submit, get human data from form and generate tiles
-    document.querySelector('#human-data').addEventListener('submit', event => {
+    form.addEventListener('submit', event => {
         event.preventDefault();
         let formData = Object.fromEntries(new FormData(event.target));
         formData.species = 'Human';
-        grid.createTiles(9, formData).forEach(element => {
-            document.querySelector('#grid').appendChild(element);
+        builder.createTiles(9, formData).forEach(element => {
+            grid.appendChild(element);
         })
     })
 }
 
-//grid module
-const grid = (() => {
+//tools for building the content
+const builder = (() => {
     //create tiles from dinos and form, support for larger grid sizes and more dinos
     function createTiles(gridsize, formData) {
         let dinos = dinoData.getDinos();
@@ -49,8 +53,15 @@ const grid = (() => {
 
         return tiles;
     }
+    //helper to format height into feet and inches
+    function heightFormat(heightInInches) {
+        let inches = heightInInches % 12;
+        let feet = (heightInInches - inches) / 12;
+        return `${feet}' ${inches}"`
+    }
     return {
-        createTiles: createTiles
+        createTiles: createTiles,
+        heightFormat: heightFormat
     }
 
 })();
@@ -110,10 +121,10 @@ class Creature {
                 return `${this.name}(${this.weight}lbs) is ${compare} ${creature.name}(${creature.weight}lbs)`;
             case 'height':
                 difference = Math.abs(this.height - creature.height);
-                if (this.height > creature.height) compare = `${heightFormat(difference)} taller than`;
-                else if (this.height < creature.height) compare = `${heightFormat(difference)} shorter than`;
+                if (this.height > creature.height) compare = `${builder.heightFormat(difference)} taller than`;
+                else if (this.height < creature.height) compare = `${builder.heightFormat(difference)} shorter than`;
                 else if (this.height === creature.height) compare = 'the exact same height as';
-                return `${this.name}(${heightFormat(this.height)}) is ${compare} ${creature.name}(${heightFormat(creature.height)})`;
+                return `${this.name}(${builder.heightFormat(this.height)}) is ${compare} ${creature.name}(${builder.heightFormat(creature.height)})`;
             case 'diet':
                 this.diet = this.diet.toLowerCase();
                 creature.diet = creature.diet.toLowerCase();
@@ -160,11 +171,4 @@ class Creature {
 
         return tile;
     }
-}
-
-//helper to format height into feet and inches
-function heightFormat(heightInInches) {
-    let inches = heightInInches % 12;
-    let feet = (heightInInches - inches) / 12;
-    return `${feet}' ${inches}"`
 }
