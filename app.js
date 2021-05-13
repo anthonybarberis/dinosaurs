@@ -20,6 +20,14 @@ window.onload = () => {
         builder.createTiles(9, formData).forEach(element => {
             grid.appendChild(element);
         })
+        form.classList.add('removed');
+        reset.classList.remove('removed');
+    })
+
+    reset.addEventListener('click', () => {
+        grid.innerHTML = '';
+        form.classList.remove('removed');
+        reset.classList.add('removed');
     })
 }
 
