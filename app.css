@@ -87,3 +87,14 @@ footer {
 .removed {
     display: none;
 }
+
+@media (max-width: 500px) {
+    .tile p {
+        font-size: .8em;
+    }
+
+    .tile img {
+        width: 80%;
+        margin: 5px 0;
+    }
+}
