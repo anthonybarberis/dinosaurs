@@ -26,6 +26,6 @@ form label {
     width: 200px;
 }
 
-#again {
+.removed {
     display: none;
 }
