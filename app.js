@@ -126,13 +126,13 @@ class Creature {
                 if (this.weight > creature.weight) compare = `${difference}lbs heavier than`;
                 else if (this.weight < creature.weight) compare = `${difference}lbs lighter than`;
                 else if (this.weight === creature.weight) compare = 'the exact same weight as';
-                return `${this.name}(${this.weight}lbs) is ${compare} ${creature.name}(${creature.weight}lbs)`;
+                return `${this.name} (${this.weight}lbs) is ${compare} ${creature.name} (${creature.weight}lbs)`;
             case 'height':
                 difference = Math.abs(this.height - creature.height);
                 if (this.height > creature.height) compare = `${builder.heightFormat(difference)} taller than`;
                 else if (this.height < creature.height) compare = `${builder.heightFormat(difference)} shorter than`;
                 else if (this.height === creature.height) compare = 'the exact same height as';
-                return `${this.name}(${builder.heightFormat(this.height)}) is ${compare} ${creature.name}(${builder.heightFormat(creature.height)})`;
+                return `${this.name} (${builder.heightFormat(this.height)}) is ${compare} ${creature.name} (${builder.heightFormat(creature.height)})`;
             case 'diet':
                 this.diet = this.diet.toLowerCase();
                 creature.diet = creature.diet.toLowerCase();
@@ -142,8 +142,8 @@ class Creature {
                     carnivore: 2
                 }
                 if (diets[this.diet] === diets[creature.diet]) return `${this.name} and ${creature.name} have the same diet (${this.diet})`
-                else if (diets[this.diet] > diets[creature.diet]) return `${this.name}(${this.diet}) might eat ${creature.name}(${creature.diet})`
-                else if (diets[this.diet] < diets[creature.diet]) return `${this.name}(${this.diet}) might be eaten by ${creature.name}(${creature.diet})`
+                else if (diets[this.diet] > diets[creature.diet]) return `${this.name} (${this.diet}) might eat ${creature.name} (${creature.diet})`
+                else if (diets[this.diet] < diets[creature.diet]) return `${this.name} (${this.diet}) might be eaten by ${creature.name} (${creature.diet})`
         }
     }
     //method for Creature to generate its tile
