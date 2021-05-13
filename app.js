@@ -140,16 +140,13 @@ class Creature {
         tile.appendChild(image);
 
         let fact = document.createElement('p');
-        let randFact = Math.floor(Math.random() * 4)
-        console.log(creatureToCompare);
+        let randFact = Math.floor(Math.random() * 6)
         if (randFact == 0) fact.textContent = this.fact;
         if (randFact == 1) fact.textContent = `${this.name} was alive during the ${this.when}`;
         if (randFact == 2) fact.textContent = `${this.name} lived in ${this.where}`;
         if (randFact == 3) fact.textContent = this.compareCreatures('weight', creatureToCompare);
-        if (randFact == 4) fact.textContent = this.fact;
-        if (randFact == 5) fact.textContent = this.fact;
-        if (randFact == 6) fact.textContent = this.fact;
-        if (randFact == 7) fact.textContent = this.fact;
+        if (randFact == 4) fact.textContent = this.compareCreatures('height', creatureToCompare);
+        if (randFact == 5) fact.textContent = this.compareCreatures('diet', creatureToCompare);;
         tile.appendChild(fact);
 
         return tile;
