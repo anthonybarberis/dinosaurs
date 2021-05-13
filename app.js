@@ -151,6 +151,7 @@ class Creature {
         let tile = document.createElement('div');
         tile.classList.add('tile');
         tile.id = this.species;
+        tile.style = `background-color:rgba(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.random()})`;
 
         //set species name
         let name = document.createElement('p');
